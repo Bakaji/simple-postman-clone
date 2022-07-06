@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Postman</title>
+  <script src="/main.js" type="module"></script>
+  <style>
+    [data-json-request-body] {
+      height: 200px;
+    }
+
+    [data-json-response-body] {
+      height: 500px;
+    }
+
+    [data-response-headers] {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 0.5rem 2rem
+    }
+
+    #requestEditorContainer textarea {
+      min-height: 500px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="p-4">
+    <form data-form>
+      <div class="input-group mb-4">
+        <select title="method" class="form-select flex-grow-0 w-auto" data-method>
+          <option selected value="GET">GET</option>
+          <option value="POST">POST</option>
+          <option value="PUT">PUT</option>
+          <option value="PATCH">PATCH</option>
+          <option value="DELETE">DELETE</option>
+        </select>
+        <input type="url" data-url placeholder="https://www.example.com/" class="form-control"
+          value="https://jsonplaceholder.typicode.com/posts" />
+        <input type="submit" value="Send" class="btn btn-primary" />
+      </div>
+      <ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active" id="query-params-tab" data-bs-toggle="tab" data-bs-target="#query-params"
+            type="button" role="tab" aria-controls="query-params" aria-selected="true">
+            Query Params
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="request-headers-tab" data-bs-toggle="tab" data-bs-target="#request-headers"
+            type="button" role="tab" aria-controls="request-headers" aria-selected="false">
+            Headers
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="json-tab" data-bs-toggle="tab" data-bs-target="#json" type="button" role="tab"
+            aria-controls="json" aria-selected="false">
+            JSON
+          </button>
+        </li>
+      </ul>
+      <div class="tab-content p-3 b-top-0 border">
+        <div class="tab-pane fade show active" id="query-params" role="tabpanel" aria-labelledby="query-params-tab">
+          <div data-query-params></div>
+          <button data-add-query-param-btn class="mt-2 btn btn-outline-success" type="button">
+            Add
+          </button>
+        </div>
+        <div class="tab-pane fade" id="request-headers" role="tabpanel" aria-labelledby="request-headers-tab">
+          <div data-request-headers></div>
+          <button data-add-request-header-btn class="mt-2 btn btn-outline-success" type="button">
+            Add
+          </button>
+        </div>
+        <div class="tab-pane fade" id="json" role="tabpanel" aria-labelledby="json-tab">
+          <div data-json></div>
+          <div id="requestEditorContainer" data-json-request-body class="overflow-auto">
+          </div>
+        </div>
+      </div>
+    </form>
+    <div class="mt-5 d-none" data-response-section>
+      <h3>Response</h3>
+      <div class="d-flex my-2">
+        <div class="me-3">
+          Status: <span data-status></span>
+        </div>
+        <div class="me-3">
+          Time: <span data-time></span>ms
+        </div>
+        <div class="me-3">
+          Size: <span data-size></span>
+        </div>
+      </div>
+      <ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active" id="response-body-tab" data-bs-toggle="tab" data-bs-target="#response-body"
+            type="button" role="tab" aria-controls="response-body" aria-selected="true">
+            Body
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="response-headers-tab" data-bs-toggle="tab" data-bs-target="#response-headers"
+            type="button" role="tab" aria-controls="response-headers" aria-selected="false">
+            Headers
+          </button>
+        </li>
+      </ul>
+      <div class="tab-content p-3 b-top-0 border">
+        <div class="tab-pane fade show active" id="response-body" role="tabpanel" aria-labelledby="response-body-tab">
+          <div data-response-body></div>
+          <div id="responseEditorContainer" data-json-response-body class="overflow-auto">
+          </div>
+
+          <div class="tab-pane fade" id="response-headers" role="tabpanel" aria-labelledby="response-headers-tab">
+            <div data-response-headers></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+<template data-key-value-template>
+  <div class="input-group position-relative mt-2" data-key-value-pair>
+    <input type="text" data-key class="form-control me-2" placeholder="key">
+    <input type="text" data-value class="form-control me-2" placeholder="value">
+    <button type="button" data-remove-btn class="btn btn-outline-danger">Remove</button>
+  </div>
+</template>
+
+</html>
